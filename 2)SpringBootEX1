@@ -1,0 +1,131 @@
+---------------------------------------------------------------------------------------- main class
+package com.example.wiprob5RestApi;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.example.wiprob5RestApi.model.Book;
+
+
+@SpringBootApplication //------------------------------->> THIS CONTAINS LOT OF ANNOTATIONS
+public class Wiprob5RestApiApplication {
+
+	
+	public static void main(String[] args) {    //--------->>> MAIN CLASS
+	
+
+		SpringApplication.run(Wiprob5RestApiApplication.class, args);
+			
+	}
+
+	
+	
+}
+-------------------------------------------------------------------------------------
+@SpringBootapplication (INBUILT HAS ALL TJIS BELOW NO NEED TO WRITE AGAIN AND AGAIN)
+
+@Target(value={TYPE})
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan(excludeFilters={@Filter(type=CUSTOM, classes={TypeExcludeFilter.class}), @Filter(type=CUSTOM, classes={AutoConfigurationExcludeFilter.class})})
+@Retention(value=RUNTIME)
+@Documented
+@Inherited
+-------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------- controller 
+
+
+package com.example.wiprob5RestApi.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.wiprob5RestApi.model.Book;
+
+@RestController                         
+@RequestMapping("books")                //------>> is both class level & method level annotation 
+public class MyController {
+
+	//http://localhost:1234/request    //----------------->>> if we dont use Request mapping   JKEEP THIS LINK IN POSTMAN AND TEST
+  //http://localhost:1234/books/request  //------->>> if we use request mapping
+	@GetMapping("/request")    //----->>> method level annotation
+	public String hello()
+	{
+		return "hello world";
+	}
+	
+   //http://localhost:1234/test //----------------->>> if we dont use Request mapping
+	//http://localhost:1234/books/test  //------->>> if we use request mapping
+	@GetMapping("/test")
+	public String hello1()
+	{
+		return "hello world test";     //------>> STRING TYPE 
+	}
+	
+	//http://localhost:1234/books
+	@GetMapping()
+	public Book getBook()
+	{
+		return new Book("Rest APIDevelopment", 44);     ///--------->>> TO GET VALUES IN JSON FORMAT WE WRITE LIKE THIS <<<<<
+	}
+	
+	
+	
+}
+
+
+--------------------------------------------------------------------------------------------------------- model book class
+
+package com.example.wiprob5RestApi.model;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Book {
+
+	String name;
+	int isbn;
+	
+	public Book() {
+	
+		name="test app";
+		System.out.println("book const");
+	}
+
+	public Book(String name, int isbn) {
+		super();
+		this.name = name;
+		this.isbn = isbn;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(int isbn) {
+		this.isbn = isbn;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [name=" + name + ", isbn=" + isbn + "]";
+	}
+	
+}
+
+---------------------------------------------------------------------------------------------------------- application.properties file 
+
+server.port=1234   // port umber wecan give any number by default port is 8080
+
