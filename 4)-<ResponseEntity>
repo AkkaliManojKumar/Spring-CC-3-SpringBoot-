@@ -60,3 +60,7 @@ public class ProductController {
 	
 		
 }
+
+
+----------------------------------- normal 200 ok
+-----------------------------------by usig response entity --- 302 found (this is the best practice) in the industry
