@@ -59,8 +59,8 @@ public class ProductController {
 	
 	
 	@PostMapping       //------------->>> for posting the data 
-	public ResponseEntity<Product> postProduct(@RequestBody Product product){      
-		products.add(product);   //->>> (((adding product to the products))))
+	public ResponseEntity<Product> postProduct(@RequestBody Product product){    //------->> here i want to post product so i have to write product in method  
+		products.add(product);   //->>> (((adding product to the products))))   //--->> posting data we have to give in postman
 		return new ResponseEntity<Product>(product,HttpStatus.CREATED);
 	}
 	
